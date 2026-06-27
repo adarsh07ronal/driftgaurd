@@ -146,7 +146,12 @@ export function lintDesignMd(doc: ParsedDoc): LintReport {
   const canonicalOrder = ["overview","colors","typography","layout","elevation","shapes","components","do"];
   const bodyMatch = doc.raw.match(/^---[\s\S]*?---\n?([\s\S]*)$/);
   if (bodyMatch) {
-    const headings = [...bodyMatch[1].matchAll(/^## (.+)$/gm)].map(m => m[1].toLowerCase());
+    const headings: string[] = [];
+const headingRegex = /^## (.+)$/gm;
+let hMatch;
+while ((hMatch = headingRegex.exec(bodyMatch[1])) !== null) {
+  headings.push(hMatch[1].toLowerCase());
+}
     let lastIdx = -1;
     for (const h of headings) {
       const idx = canonicalOrder.findIndex(c => h.includes(c));
