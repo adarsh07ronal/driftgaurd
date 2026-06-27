@@ -1,0 +1,71 @@
+"use client";
+
+import { useSearchParams } from "next/navigation";
+import { useState } from "react";
+
+export default function AuthPage() {
+  const searchParams = useSearchParams();
+  const error = searchParams.get("error");
+  const installationId = searchParams.get("installation_id");
+  const [loading, setLoading] = useState(false);
+
+  const handleSignIn = () => {
+    setLoading(true);
+    const state = installationId ? `install_${installationId}` : "login";
+    const params = new URLSearchParams({
+      client_id: process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID || "",
+      redirect_uri: `${process.env.NEXT_PUBLIC_APP_URL}/api/github/callback`,
+      scope: "user:email",
+      state,
+    });
+    window.location.href = `https://github.com/login/oauth/authorize?${params}`;
+  };
+
+  const errorMessages: Record<string, string> = {
+    no_code: "GitHub didn't return an authorization code. Please try again.",
+    no_email: "Could not get your GitHub email address. Make sure your email is visible on GitHub.",
+    oauth_failed: "Authentication failed. Please try again.",
+  };
+
+  return (
+    <main className="min-h-screen flex items-center justify-center px-6">
+      <div className="max-w-sm w-full">
+        <div className="text-center mb-8">
+          <span className="font-mono font-medium text-lg tracking-tight">
+            designmd<span className="text-muted-foreground">.app</span>
+          </span>
+          <p className="text-sm text-muted-foreground mt-2">
+            {installationId
+              ? "Connect your account to manage your installation"
+              : "Sign in to view your dashboard"}
+          </p>
+        </div>
+
+        {error && (
+          <div className="mb-4 text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-4 py-3">
+            {errorMessages[error] ?? "Something went wrong. Please try again."}
+          </div>
+        )}
+
+        <button
+          onClick={handleSignIn}
+          disabled={loading}
+          className="w-full flex items-center justify-center gap-3 bg-foreground text-background py-2.5 rounded-lg text-sm font-medium hover:opacity-90 disabled:opacity-50 transition-opacity"
+        >
+          {loading ? (
+            <span className="w-4 h-4 border-2 border-background/30 border-t-background rounded-full animate-spin" />
+          ) : (
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+            </svg>
+          )}
+          {loading ? "Signing in…" : "Continue with GitHub"}
+        </button>
+
+        <p className="text-xs text-center text-muted-foreground mt-4">
+          We only request your email address. We never read your code.
+        </p>
+      </div>
+    </main>
+  );
+}

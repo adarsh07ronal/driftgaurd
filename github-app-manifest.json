@@ -1,0 +1,27 @@
+{
+  "name": "designmd",
+  "description": "Enforces your DESIGN.md on every pull request. Checks token references, WCAG contrast, typography, and section order automatically.",
+  "url": "https://designmd.app",
+  "hook_attributes": {
+    "url": "https://designmd.app/api/github/webhook",
+    "active": true
+  },
+  "redirect_url": "https://designmd.app/install",
+  "callback_urls": [
+    "https://designmd.app/api/github/callback"
+  ],
+  "setup_url": "https://designmd.app/install",
+  "setup_on_update": true,
+  "public": true,
+  "default_permissions": {
+    "contents": "read",
+    "pull_requests": "write",
+    "statuses": "write",
+    "metadata": "read"
+  },
+  "default_events": [
+    "pull_request",
+    "installation",
+    "installation_repositories"
+  ]
+}
