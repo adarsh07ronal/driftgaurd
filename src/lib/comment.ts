@@ -1,7 +1,7 @@
 import type { LintReport, LintFinding } from "@/types";
 
 const BOT_MARKER = "<!-- designmd-bot -->";
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://designmd.app";
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://driftgaurd.vercel.app";
 
 const SEVERITY_ICON: Record<string, string> = {
   error: "🔴",
@@ -58,7 +58,7 @@ A \`DESIGN.md\` file gives AI coding agents (Cursor, Claude Code, Copilot) a per
 2. Add \`DESIGN.md\` to the root of \`${repoFullName}\`
 3. This check will automatically run on the next PR
 
-<sub>Powered by [designmd.app](${APP_URL}) · [Dashboard](${dashboardUrl})</sub>`;
+<sub>Powered by [driftgaurd.vercel.app](${APP_URL}) · [Dashboard](${dashboardUrl})</sub>`;
   }
 
   const { summary, findings } = report;
@@ -73,7 +73,7 @@ A \`DESIGN.md\` file gives AI coding agents (Cursor, Claude Code, Copilot) a per
 
 ${info > 0 ? `<details>\n<summary>${info} info finding${info !== 1 ? "s" : ""}</summary>\n${findingsTable(findings.filter(f => f.severity === "info"))}\n</details>` : ""}
 
-<sub>Powered by [designmd.app](${APP_URL}) · [Edit design system](${editorUrl}) · [Dashboard](${dashboardUrl})</sub>`;
+<sub>Powered by [driftgaurd.vercel.app](${APP_URL}) · [Edit design system](${editorUrl}) · [Dashboard](${dashboardUrl})</sub>`;
   }
 
   // ── Errors or warnings ───────────────────────────────────────────────────
@@ -109,7 +109,7 @@ ${summaryLine}`;
     body += `\n\n<details>\n<summary>Info (${infoFindings.length})</summary>\n${findingsTable(infoFindings)}\n</details>`;
   }
 
-  body += `\n\n<sub>Powered by [designmd.app](${APP_URL}) · [Edit design system](${editorUrl}) · [Dashboard](${dashboardUrl})</sub>`;
+  body += `\n\n<sub>Powered by [driftgaurd.vercel.app](${APP_URL}) · [Edit design system](${editorUrl}) · [Dashboard](${dashboardUrl})</sub>`;
 
   return body;
 }

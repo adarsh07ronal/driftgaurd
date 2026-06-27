@@ -90,7 +90,7 @@ export default function HomePage() {
               <span className="text-background text-xs font-medium">D</span>
             </div>
             <div>
-              <span className="text-sm font-medium">designmd</span>
+              <span className="text-sm font-medium">driftgaurd</span>
               <span className="text-xs text-muted-foreground ml-2">commented just now</span>
             </div>
           </div>
@@ -115,7 +115,7 @@ export default function HomePage() {
               ))}
             </div>
             <p className="text-xs text-muted-foreground">
-              Powered by <a href="/" className="underline">designmd.app</a> · <a href="/editor" className="underline">Edit design system</a> · <a href="/dashboard" className="underline">Dashboard</a>
+              Powered by <a href="/" className="underline">driftgaurd.vercel.app</a> · <a href="/editor" className="underline">Edit design system</a> · <a href="/dashboard" className="underline">Dashboard</a>
             </p>
           </div>
         </div>
@@ -157,7 +157,7 @@ export default function HomePage() {
 
       <footer className="border-t px-6 py-8 text-center">
         <p className="text-xs text-muted-foreground">
-          designmd.app — Built on the{" "}
+          driftgaurd.vercel.app — Built on the{" "}
           <a href="https://github.com/google-labs-code/design.md" className="underline" target="_blank">
             google-labs-code/design.md
           </a>{" "}
