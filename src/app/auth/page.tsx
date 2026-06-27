@@ -1,9 +1,9 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 
-export default function AuthPage() {
+function AuthContent() {
   const searchParams = useSearchParams();
   const error = searchParams.get("error");
   const installationId = searchParams.get("installation_id");
@@ -32,7 +32,7 @@ export default function AuthPage() {
       <div className="max-w-sm w-full">
         <div className="text-center mb-8">
           <span className="font-mono font-medium text-lg tracking-tight">
-            designmd<span className="text-muted-foreground">.app</span>
+            driftgaurd<span className="text-muted-foreground">.app</span>
           </span>
           <p className="text-sm text-muted-foreground mt-2">
             {installationId
@@ -40,13 +40,11 @@ export default function AuthPage() {
               : "Sign in to view your dashboard"}
           </p>
         </div>
-
         {error && (
           <div className="mb-4 text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-4 py-3">
             {errorMessages[error] ?? "Something went wrong. Please try again."}
           </div>
         )}
-
         <button
           onClick={handleSignIn}
           disabled={loading}
@@ -61,11 +59,18 @@ export default function AuthPage() {
           )}
           {loading ? "Signing in…" : "Continue with GitHub"}
         </button>
-
         <p className="text-xs text-center text-muted-foreground mt-4">
           We only request your email address. We never read your code.
         </p>
       </div>
     </main>
+  );
+}
+
+export default function AuthPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><span className="text-sm text-muted-foreground">Loading...</span></div>}>
+      <AuthContent />
+    </Suspense>
   );
 }
