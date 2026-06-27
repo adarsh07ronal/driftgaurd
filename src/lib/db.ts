@@ -20,7 +20,7 @@ export async function createServerSupabaseClient() {
     {
       cookies: {
         getAll: () => cookieStore.getAll(),
-        setAll: (cs) => { try { cs.forEach(({ name, value, options }) => cookieStore.set(name, value, options)); } catch {} },
+        setAll: (cs: Parameters<typeof cookieStore.setAll>[0]) => { try { cs.forEach(({ name, value, options }) => cookieStore.set(name, value, options)); } catch {} },
       },
     }
   );
