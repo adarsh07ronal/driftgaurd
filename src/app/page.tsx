@@ -7,7 +7,7 @@ export default function HomePage() {
     <main className="min-h-screen">
       <nav className="border-b px-6 h-14 flex items-center justify-between">
         <span className="font-mono font-medium text-sm tracking-tight">
-          designmd<span className="text-muted-foreground">.app</span>
+          driftgaurd<span className="text-muted-foreground">.app</span>
         </span>
         <div className="flex items-center gap-3">
           <Link href="/editor" className="text-sm text-muted-foreground hover:text-foreground">Editor</Link>
