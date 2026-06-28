@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, Suspense } from "react";
-import { createClient } from "@/lib/db";
+import { createClient } from "@/lib/supabase-browser";
 
 function AuthContent() {
   const [loading, setLoading] = useState(false);
