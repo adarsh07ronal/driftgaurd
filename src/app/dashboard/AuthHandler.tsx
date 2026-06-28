@@ -8,6 +8,11 @@ export default function AuthHandler() {
   const router = useRouter();
 
   useEffect(() => {
+    // Strip ?code= from URL so Supabase doesn't re-process it on every render
+    if (window.location.search.includes("code=")) {
+      window.history.replaceState({}, "", window.location.pathname);
+    }
+
     const supabase = createClient();
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (event === "SIGNED_IN" && session?.user) {
