@@ -1,5 +1,6 @@
 import Link from "next/link";
 import SignOutButton from "./SignOutButton";
+import AuthHandler from "./AuthHandler";
 import { createServerSupabaseClient, getRecentChecks, getUserInstallations, getUserRepos } from "@/lib/db";
 import { redirect } from "next/navigation";
 
@@ -31,6 +32,7 @@ export default async function DashboardPage() {
 
   return (
     <main className="min-h-screen">
+      <AuthHandler />
       {/* Nav */}
       <nav className="border-b px-6 h-14 flex items-center justify-between">
         <Link href="/" className="font-mono font-medium text-sm tracking-tight">
