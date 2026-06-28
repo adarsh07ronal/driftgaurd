@@ -15,7 +15,7 @@ function AuthContent() {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "github",
         options: {
-          redirectTo: `${window.location.origin}/api/github/callback`,
+          redirectTo: `${window.location.origin}/auth/callback`,
           scopes: "user:email",
         },
       });
