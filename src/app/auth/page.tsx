@@ -1,30 +1,29 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
 import { useState, Suspense } from "react";
+import { createClient } from "@/lib/db";
 
 function AuthContent() {
-  const searchParams = useSearchParams();
-  const error = searchParams.get("error");
-  const installationId = searchParams.get("installation_id");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSignIn = () => {
+  const handleSignIn = async () => {
     setLoading(true);
-    const state = installationId ? `install_${installationId}` : "login";
-    const params = new URLSearchParams({
-      client_id: process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID || "",
-      redirect_uri: `${process.env.NEXT_PUBLIC_APP_URL}/api/github/callback`,
-      scope: "user:email",
-      state,
-    });
-    window.location.href = `https://github.com/login/oauth/authorize?${params}`;
-  };
-
-  const errorMessages: Record<string, string> = {
-    no_code: "GitHub didn't return an authorization code. Please try again.",
-    no_email: "Could not get your GitHub email address. Make sure your email is visible on GitHub.",
-    oauth_failed: "Authentication failed. Please try again.",
+    setError("");
+    try {
+      const supabase = createClient();
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "github",
+        options: {
+          redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/api/github/callback`,
+          scopes: "user:email",
+        },
+      });
+      if (error) throw error;
+    } catch (e) {
+      setError("Authentication failed. Please try again.");
+      setLoading(false);
+    }
   };
 
   return (
@@ -35,16 +34,16 @@ function AuthContent() {
             driftgaurd<span className="text-muted-foreground">.app</span>
           </span>
           <p className="text-sm text-muted-foreground mt-2">
-            {installationId
-              ? "Connect your account to manage your installation"
-              : "Sign in to view your dashboard"}
+            Sign in to view your dashboard
           </p>
         </div>
+
         {error && (
           <div className="mb-4 text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-4 py-3">
-            {errorMessages[error] ?? "Something went wrong. Please try again."}
+            {error}
           </div>
         )}
+
         <button
           onClick={handleSignIn}
           disabled={loading}
@@ -59,6 +58,7 @@ function AuthContent() {
           )}
           {loading ? "Signing in…" : "Continue with GitHub"}
         </button>
+
         <p className="text-xs text-center text-muted-foreground mt-4">
           We only request your email address. We never read your code.
         </p>
