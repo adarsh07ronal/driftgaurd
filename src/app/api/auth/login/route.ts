@@ -1,17 +1,18 @@
-import { createServerClient } from "@supabase/ssr";
+import { createClient } from "@supabase/supabase-js";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
-  // Collect cookies that signInWithOAuth wants to set (code_verifier)
-  const cookieJar: { name: string; value: string; options: Record<string, unknown> }[] = [];
-
-  const supabase = createServerClient(
+  // Use supabase-js directly with implicit flow so NO code_verifier is generated.
+  // Supabase will return #access_token=... in the hash instead of ?code=...
+  const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
-      cookies: {
-        getAll: () => request.cookies.getAll(),
-        setAll: (list) => { cookieJar.push(...list); },
+      auth: {
+        flowType: "implicit",
+        autoRefreshToken: false,
+        persistSession: false,
+        detectSessionInUrl: false,
       },
     }
   );
@@ -31,12 +32,6 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  // Attach the code_verifier cookie to the same response that redirects to GitHub
-  // so the browser has it when it comes back to /auth/callback
-  const response = NextResponse.redirect(data.url);
-  cookieJar.forEach(({ name, value, options }) => {
-    response.cookies.set(name, value, options as Parameters<typeof response.cookies.set>[2]);
-  });
-
-  return response;
+  // No code_verifier needed — redirect straight to GitHub
+  return NextResponse.redirect(data.url);
 }
