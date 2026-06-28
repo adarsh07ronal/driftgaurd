@@ -37,9 +37,6 @@ export default async function DashboardPage() {
         </Link>
         <div className="flex items-center gap-3">
           <span className="text-xs text-muted-foreground">{user.email}</span>
-          <Link href="/editor" className="text-xs border rounded px-3 py-1.5 hover:bg-muted">
-            Editor
-          </Link>
         </div>
       </nav>
 
