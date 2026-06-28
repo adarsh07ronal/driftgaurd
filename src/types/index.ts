@@ -91,6 +91,7 @@ export interface WebhookPayload {
     head: { sha: string; ref: string };
     html_url: string;
   };
+  repositories?: Array<{ id: number; full_name: string; private: boolean }>;
   repositories_added?: Array<{ id: number; full_name: string; private: boolean }>;
   repositories_removed?: Array<{ id: number; full_name: string }>;
 }

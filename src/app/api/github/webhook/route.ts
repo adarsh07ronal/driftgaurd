@@ -62,21 +62,20 @@ export async function POST(req: NextRequest) {
 // ─── Installation created / deleted ─────────────────────────────────────────
 
 async function handleInstallation(payload: WebhookPayload) {
-  const { action, installation, sender, repositories_added } = payload;
+  const { action, installation, sender, repositories, repositories_added } = payload;
 
   if (action === "created") {
-    // Store installation record — user_id resolved later via OAuth
     await upsertInstallation({
       id: installation.id,
-      user_id: sender.login, // temp — overwritten when user links account
+      user_id: sender.login,
       account_login: sender.login,
       account_type: sender.type as "User" | "Organization",
-      account_avatar_url: "",
+      account_avatar_url: sender.avatar_url ?? "",
       suspended: false,
     });
 
-    // Add all repos that came with the install
-    for (const repo of repositories_added ?? []) {
+    // installation.created sends repos under "repositories", not "repositories_added"
+    for (const repo of repositories ?? repositories_added ?? []) {
       await upsertMonitoredRepo({
         installation_id: installation.id,
         user_id: sender.login,

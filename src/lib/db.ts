@@ -98,20 +98,27 @@ export async function getUserProfile(userId: string): Promise<UserProfile | null
 
 export async function getUserInstallations(userId: string): Promise<GithubInstallation[]> {
   const db = createServiceClient();
+  // Look up github_username from profile first
+  const { data: profile } = await db.from("profiles").select("github_username").eq("id", userId).single();
+  const login = profile?.github_username;
+  if (!login) return [];
   const { data } = await db
     .from("github_installations")
     .select("*")
-    .eq("user_id", userId)
+    .eq("account_login", login)
     .order("installed_at", { ascending: false });
   return data ?? [];
 }
 
 export async function getUserRepos(userId: string): Promise<MonitoredRepo[]> {
   const db = createServiceClient();
+  const { data: profile } = await db.from("profiles").select("github_username").eq("id", userId).single();
+  const login = profile?.github_username;
+  if (!login) return [];
   const { data } = await db
     .from("monitored_repos")
     .select("*")
-    .eq("user_id", userId)
+    .eq("user_id", login)
     .order("created_at", { ascending: false });
   return data ?? [];
 }

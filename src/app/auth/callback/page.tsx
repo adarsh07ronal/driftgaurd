@@ -14,12 +14,18 @@ export default function AuthCallbackPage() {
       router.replace("/auth?error=no_code");
       return;
     }
-    supabase.auth.exchangeCodeForSession(code).then(({ error }) => {
+    supabase.auth.exchangeCodeForSession(code).then(async ({ data, error }) => {
       if (error) {
         router.replace("/auth?error=oauth_failed");
-      } else {
-        router.replace("/dashboard");
+        return;
       }
+      // Save GitHub username to profile so dashboard can match installations
+      const user = data.session?.user;
+      const username = user?.user_metadata?.user_name ?? user?.user_metadata?.preferred_username;
+      if (user && username) {
+        await supabase.from("profiles").upsert({ id: user.id, email: user.email ?? "", github_username: username });
+      }
+      router.replace("/dashboard");
     });
   }, [router]);
 
