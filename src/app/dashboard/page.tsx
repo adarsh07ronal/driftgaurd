@@ -1,4 +1,5 @@
 import Link from "next/link";
+import SignOutButton from "./SignOutButton";
 import { createServerSupabaseClient, getRecentChecks, getUserInstallations, getUserRepos } from "@/lib/db";
 import { redirect } from "next/navigation";
 
@@ -37,6 +38,7 @@ export default async function DashboardPage() {
         </Link>
         <div className="flex items-center gap-3">
           <span className="text-xs text-muted-foreground">{user.email}</span>
+          <SignOutButton />
         </div>
       </nav>
 
