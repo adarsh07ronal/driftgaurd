@@ -36,7 +36,7 @@ export default async function DashboardPage() {
       {/* Nav */}
       <nav className="border-b px-6 h-14 flex items-center justify-between">
         <Link href="/" className="font-mono font-medium text-sm tracking-tight">
-          driftgaurd<span className="text-muted-foreground">.app</span>
+          driftguard<span className="text-muted-foreground">.app</span>
         </Link>
         <div className="flex items-center gap-3">
           <span className="text-xs text-muted-foreground">{user.email}</span>

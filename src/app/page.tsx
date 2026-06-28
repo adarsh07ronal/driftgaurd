@@ -7,7 +7,7 @@ export default function HomePage() {
     <main className="min-h-screen">
       <nav className="border-b px-6 h-14 flex items-center justify-between">
         <span className="font-mono font-medium text-sm tracking-tight">
-          driftgaurd<span className="text-muted-foreground">.app</span>
+          driftguard<span className="text-muted-foreground">.app</span>
         </span>
         <div className="flex items-center gap-3">
           
@@ -90,7 +90,7 @@ export default function HomePage() {
               <span className="text-background text-xs font-medium">D</span>
             </div>
             <div>
-              <span className="text-sm font-medium">driftgaurd</span>
+              <span className="text-sm font-medium">driftguard</span>
               <span className="text-xs text-muted-foreground ml-2">commented just now</span>
             </div>
           </div>
@@ -115,7 +115,7 @@ export default function HomePage() {
               ))}
             </div>
             <p className="text-xs text-muted-foreground">
-              Powered by <a href="/" className="underline">driftgaurd.vercel.app</a> · <a href="/dashboard" className="underline">Dashboard</a>
+              Powered by <a href="/" className="underline">driftguard.vercel.app</a> · <a href="/dashboard" className="underline">Dashboard</a>
             </p>
           </div>
         </div>
@@ -157,7 +157,7 @@ export default function HomePage() {
 
       <footer className="border-t px-6 py-8 text-center">
         <p className="text-xs text-muted-foreground">
-          driftgaurd.vercel.app — Built on the{" "}
+          driftguard.vercel.app — Built on the{" "}
           <a href="https://github.com/google-labs-code/design.md" className="underline" target="_blank">
             google-labs-code/design.md
           </a>{" "}

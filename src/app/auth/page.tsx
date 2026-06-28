@@ -10,7 +10,7 @@ export default async function AuthPage({
       <div className="max-w-sm w-full">
         <div className="text-center mb-8">
           <span className="font-mono font-medium text-lg tracking-tight">
-            driftgaurd<span className="text-muted-foreground">.app</span>
+            driftguard<span className="text-muted-foreground">.app</span>
           </span>
           <p className="text-sm text-muted-foreground mt-2">Sign in to view your dashboard</p>
         </div>

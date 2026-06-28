@@ -47,7 +47,7 @@ export default function InstallPage({
               <p className="text-xs font-medium text-muted-foreground mb-3">Next step — add a DESIGN.md to your repo</p>
               <div className="bg-muted rounded-lg p-3 font-mono text-xs">
                 <p className="text-muted-foreground mb-1"># Option 1 — use our editor</p>
-                <a href="/editor" className="text-foreground underline">driftgaurd.vercel.app/editor</a>
+                <a href="/editor" className="text-foreground underline">driftguard.vercel.app/editor</a>
                 <p className="text-muted-foreground mt-2 mb-1"># Option 2 — AI generator</p>
                 <p>Describe your brand → copy → commit as DESIGN.md</p>
               </div>
