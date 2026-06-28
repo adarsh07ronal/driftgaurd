@@ -10,7 +10,7 @@ export default function HomePage() {
           driftgaurd<span className="text-muted-foreground">.app</span>
         </span>
         <div className="flex items-center gap-3">
-          <Link href="/editor" className="text-sm text-muted-foreground hover:text-foreground">Editor</Link>
+          
           <Link href="/dashboard" className="text-sm border px-3 py-1.5 rounded-md hover:bg-muted">Dashboard</Link>
           <a
             href={installUrl}
@@ -47,8 +47,8 @@ export default function HomePage() {
             </svg>
             Install on GitHub — free
           </a>
-          <Link href="/editor" className="border px-6 py-2.5 rounded-md text-sm text-muted-foreground hover:text-foreground hover:border-foreground transition-colors">
-            Build a DESIGN.md →
+          <Link href="/dashboard" className="border px-6 py-2.5 rounded-md text-sm text-muted-foreground hover:text-foreground hover:border-foreground transition-colors">
+            View dashboard →
           </Link>
         </div>
         <p className="text-xs text-muted-foreground mt-4">Free for 1 repo · No credit card required</p>
@@ -115,7 +115,7 @@ export default function HomePage() {
               ))}
             </div>
             <p className="text-xs text-muted-foreground">
-              Powered by <a href="/" className="underline">driftgaurd.vercel.app</a> · <a href="/editor" className="underline">Edit design system</a> · <a href="/dashboard" className="underline">Dashboard</a>
+              Powered by <a href="/" className="underline">driftgaurd.vercel.app</a> · <a href="/dashboard" className="underline">Dashboard</a>
             </p>
           </div>
         </div>
