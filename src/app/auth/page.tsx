@@ -5,7 +5,8 @@ import { createClient } from "@/lib/supabase-browser";
 
 function AuthContent() {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const searchParams = typeof window !== "undefined" ? new URLSearchParams(window.location.search) : null;
+  const [error, setError] = useState(searchParams?.get("error") ?? "");
 
   const handleSignIn = async () => {
     setLoading(true);

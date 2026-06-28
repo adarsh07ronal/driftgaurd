@@ -16,7 +16,7 @@ export default function AuthCallbackPage() {
     }
     supabase.auth.exchangeCodeForSession(code).then(async ({ data, error }) => {
       if (error) {
-        router.replace("/auth?error=oauth_failed");
+        router.replace(`/auth?error=${encodeURIComponent(error.message)}`);
         return;
       }
       // Save GitHub username to profile so dashboard can match installations
