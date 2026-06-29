@@ -1,5 +1,12 @@
 export type PlanTier = "free" | "pro" | "team" | "enterprise";
 
+export type {
+  LintSeverity,
+  LintFinding,
+  LintReport,
+  DesignSystem,
+} from "@driftguard/linter";
+
 export interface UserProfile {
   id: string;
   email: string;
@@ -41,38 +48,6 @@ export interface PrCheck {
   warnings: number;
   comment_url?: string;
   checked_at: string;
-}
-
-export type LintSeverity = "error" | "warning" | "info";
-
-export interface LintFinding {
-  severity: LintSeverity;
-  rule: string;
-  path: string;
-  message: string;
-  line?: number;
-}
-
-export interface LintReport {
-  findings: LintFinding[];
-  summary: { errors: number; warnings: number; info: number };
-}
-
-export interface DesignSystem {
-  version?: string;
-  name: string;
-  description?: string;
-  colors: Record<string, string>;
-  typography: Record<string, {
-    fontFamily?: string;
-    fontSize?: string;
-    fontWeight?: string | number;
-    lineHeight?: string;
-    letterSpacing?: string;
-  } | undefined>;
-  spacing: Record<string, string | number>;
-  rounded: Record<string, string>;
-  components?: Record<string, Record<string, string | undefined>>;
 }
 
 export interface WebhookPayload {
