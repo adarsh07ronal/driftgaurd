@@ -2,14 +2,22 @@
   "name": "designmd-app",
   "version": "0.1.0",
   "private": true,
+  "workspaces": [
+    "packages/*",
+    "extension"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "build:linter": "npm run build --workspace @driftguard/linter",
+    "build:extension": "npm run build:linter && npm run build --workspace driftguard-vscode",
+    "watch:extension": "npm run watch --workspace driftguard-vscode"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.24.0",
+    "@driftguard/linter": "*",
     "@octokit/auth-app": "^7.1.0",
     "@octokit/rest": "^21.0.0",
     "@supabase/ssr": "^0.12.0",

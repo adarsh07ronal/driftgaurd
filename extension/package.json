@@ -1,0 +1,58 @@
+{
+  "name": "driftguard-vscode",
+  "displayName": "DriftGuard",
+  "description": "Lint your DESIGN.md as you type. WCAG contrast, broken token refs, missing typography, section order.",
+  "version": "0.1.0",
+  "publisher": "driftguard",
+  "private": true,
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Linters", "Other"],
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onLanguage:markdown"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "driftguard.lintNow",
+        "title": "DriftGuard: Lint current DESIGN.md"
+      }
+    ],
+    "configuration": {
+      "title": "DriftGuard",
+      "properties": {
+        "driftguard.filenamePattern": {
+          "type": "string",
+          "default": "DESIGN.md",
+          "description": "Filename (case-insensitive) that DriftGuard treats as a design spec. Match is done on basename."
+        },
+        "driftguard.runOnType": {
+          "type": "boolean",
+          "default": true,
+          "description": "Re-lint while typing (debounced). Disable to only lint on save."
+        },
+        "driftguard.debounceMs": {
+          "type": "number",
+          "default": 300,
+          "description": "Debounce delay for on-type linting (milliseconds)."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "tsc -p tsconfig.json",
+    "watch": "tsc -p tsconfig.json --watch",
+    "clean": "node -e \"require('fs').rmSync('out',{recursive:true,force:true})\""
+  },
+  "dependencies": {
+    "@driftguard/linter": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5"
+  }
+}

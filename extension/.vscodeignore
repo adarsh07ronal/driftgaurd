@@ -1,0 +1,9 @@
+.vscode/**
+.vscode-test/**
+src/**
+**/*.map
+**/tsconfig.json
+node_modules/**
+!node_modules/@driftguard/linter/dist/**
+!node_modules/@driftguard/linter/package.json
+!node_modules/js-yaml/**
